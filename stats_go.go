@@ -1,3 +1,4 @@
+//go:build !js
 // +build !js
 
 package webrtc
@@ -32,7 +33,7 @@ func (r StatsReport) GetDataChannelStats(dc *DataChannel) (DataChannelStats, boo
 	return dcStats, true
 }
 
-// GetDataChannelStats is a helper method to return the associated stats for a given DataChannel
+// GetSCTPTransportStats is a helper method to return the associated stats for a given DataChannel
 func (r StatsReport) GetSCTPTransportStats(st *SCTPTransport) (SCTPTransportStats, bool) {
 	stats, ok := r["sctpTransport"]
 	if !ok {

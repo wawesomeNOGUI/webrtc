@@ -785,27 +785,39 @@ type DataChannelStats struct {
 }
 
 type SCTPTransportStats struct {
+	// Timestamp is the timestamp associated with this object.
+	Timestamp StatsTimestamp `json:"timestamp"`
+
+	// ID is a unique id that is associated with the component inspected to produce
+	// this Stats object. Two Stats objects will have the same ID if they were produced
+	// by inspecting the same underlying object.
 	ID string `json:"id"`
-	
-	// The identifier of the object that was inspected to produce the
+
+	// TransportID is the identifier of the object that was inspected to produce the
 	// RTCTransportStats for the DTLSTransport and ICETransport supporting the SCTP transport.
 	TransportID string `json:"transportId"`
 
-	// The latest smoothed round-trip time value, corresponding to spinfo_srtt defined in [RFC6458]
+	// SmoothedRoundTripTime is the latest smoothed round-trip time value, corresponding to spinfo_srtt defined in [RFC6458]
 	// but converted to seconds. If there has been no round-trip time measurements yet, this value is undefined.
 	SmoothedRoundTripTime float64 `json:"smoothedRoundTripTime"`
 
-	// The latest congestion window, corresponding to spinfo_cwnd defined in [RFC6458].
+	// CongestionWindow is the latest congestion window, corresponding to spinfo_cwnd defined in [RFC6458].
 	CongestionWindow uint32 `json:"congestionWindow"`
 
-	// The latest receiver window, corresponding to sstat_rwnd defined in [RFC6458].
+	// ReceiverWindow is the latest receiver window, corresponding to sstat_rwnd defined in [RFC6458].
 	ReceiverWindow uint32 `json:"receiverWindow"`
 
-	// The latest maximum transmission unit, corresponding to spinfo_mtu defined in [RFC6458].
+	// MTU is the latest maximum transmission unit, corresponding to spinfo_mtu defined in [RFC6458].
 	MTU uint32 `json:"mtu"`
 
-	// The number of unacknowledged DATA chunks, corresponding to sstat_unackdata defined in [RFC6458].
+	// UNACKData is the number of unacknowledged DATA chunks, corresponding to sstat_unackdata defined in [RFC6458].
 	UNACKData uint32 `json:"unackData"`
+
+	// BytesSent represents the total number of bytes sent on this SCTPTransport
+	BytesSent uint64 `json:"bytesSent"`
+
+	// BytesReceived represents the total number of bytes received on this SCTPTransport
+	BytesReceived uint64 `json:"bytesReceived"`
 }
 
 // MediaStreamStats contains statistics related to a specific MediaStream.
